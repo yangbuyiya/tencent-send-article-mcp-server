@@ -1,4 +1,4 @@
-# MCP Server Tencent
+# Tencent-send-article-mcp-server
 
 ## 项目简介
 这是一个基于 Spring Boot 3.x 和 Spring AI 的腾讯云 MCP 服务端项目。该项目主要用于与腾讯云 AI 服务进行集成，提供统一的接口调用能力。
