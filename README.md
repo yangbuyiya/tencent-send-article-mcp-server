@@ -1,9 +1,15 @@
-# 腾讯云开发者社区文章发布 MCP 服务器
 
-## 项目简介
-
-这是一个基于 MCP (Model Context Protocol) 协议的服务器，专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x
+<h1 align="center">
+    <img width="100" alt="image" src="https://github.com/user-attachments/assets/c95bbbd2-d1da-4255-a2e8-a07d7b89cfd7" />
+	<strong>腾讯云开发者社区文章发布 MCP 服务器</strong>
+</h1>
+<h3 align="center">
+    这是一个基于 MCP (Model Context Protocol) 协议的服务器，专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x
 和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，实现文章的自动发布和管理。
+</h3>
+
+<div align="center"><b>您是第<img src="https://profile-counter.glitch.me/tencent-send-article-mcp-server/count.svg"></img>个访问tencent-send-article-mcp-server~</b></div>
+
 
 ## 技术栈
 
