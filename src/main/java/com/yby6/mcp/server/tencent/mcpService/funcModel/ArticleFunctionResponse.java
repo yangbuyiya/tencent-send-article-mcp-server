@@ -17,7 +17,7 @@ import lombok.Data;
  * 2. 包含文章的唯一标识和访问链接
  * 3. 指示发布操作的成功或失败状态
  *
- * @author Yang Shuai
+ * @author yangbuyiya
  * @version 1.0.0
  * @since 2025/05/05
  */

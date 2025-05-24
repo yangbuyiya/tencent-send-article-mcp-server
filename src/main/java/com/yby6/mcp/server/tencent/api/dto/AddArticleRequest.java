@@ -139,8 +139,7 @@ public class AddArticleRequest {
      * @return ProseMirror格式的内容
      */
     public String getContent() {
-        MarkdownToProseMirrorConverter converter = new MarkdownToProseMirrorConverter();
-        return converter.convert(plain);
+        return MarkdownToProseMirrorConverter.convert(plain);
     }
 
 }

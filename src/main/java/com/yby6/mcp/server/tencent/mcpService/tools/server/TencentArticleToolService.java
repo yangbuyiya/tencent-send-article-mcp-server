@@ -1,4 +1,4 @@
-package com.yby6.mcp.server.tencent.mcpService.tools;
+package com.yby6.mcp.server.tencent.mcpService.tools.server;
 
 import com.alibaba.fastjson.JSON;
 import com.yby6.mcp.server.tencent.api.ITencentService;
@@ -8,8 +8,7 @@ import com.yby6.mcp.server.tencent.mcpService.config.properties.TencentApiProper
 import com.yby6.mcp.server.tencent.mcpService.funcModel.ArticleFunctionRequest;
 import com.yby6.mcp.server.tencent.mcpService.funcModel.ArticleFunctionResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.tool.annotation.Tool;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -31,11 +30,13 @@ import java.util.List;
 @Service
 public class TencentArticleToolService implements ToolServiceMarker {
 
-    @Autowired
-    private ITencentService tencentService;
+    private final ITencentService tencentService;
+    private final TencentApiProperties tencentApiProperties;
 
-    @Autowired
-    private TencentApiProperties tencentApiProperties;
+    public TencentArticleToolService(ITencentService tencentService, TencentApiProperties tencentApiProperties) {
+        this.tencentService = tencentService;
+        this.tencentApiProperties = tencentApiProperties;
+    }
 
     /**
      * 发布文章到腾讯云开发者社区
@@ -50,27 +51,22 @@ public class TencentArticleToolService implements ToolServiceMarker {
      * @param request 文章发布请求，包含文章标题、内容等信息
      * @return 文章发布响应，包含发布结果信息
      */
-    @Tool(description = "发布文章到腾讯云开发者社区")
+    @Override
     public ArticleFunctionResponse saveArticle(ArticleFunctionRequest request) {
+
+        // 构建返回对象
+        ArticleFunctionResponse articleFunctionResponse = new ArticleFunctionResponse();
+        articleFunctionResponse.setStatus(-1);
+        articleFunctionResponse.setArticleId(null);
+        articleFunctionResponse.setUrl(null);
+        articleFunctionResponse.setCopyright(getCopyright());
+
+
         try {
             log.info("腾讯云开发者社区发帖参数：{}", JSON.toJSONString(request));
             log.info("接收到的参数: {}", request.toString());
 
-            AddArticleRequest addArticleRequest = new AddArticleRequest();
-            addArticleRequest.setTitle(request.getTitle());
-            addArticleRequest.setPlain(request.getMarkdowncontent());
-            addArticleRequest.setContent(addArticleRequest.getContent());
-            addArticleRequest.setSourceType(1);  // 设置为原创
-            addArticleRequest.setClassifyIds(List.of(2));  // 设置文章分类
-            addArticleRequest.setTagIds(List.of(18126));  // 设置文章标签
-            addArticleRequest.setLongtailTag(List.of("mcp"));  // 设置长尾标签
-            addArticleRequest.setColumnIds(List.of(101806));  // 设置专栏ID
-            addArticleRequest.setOpenComment(1);  // 开启评论
-            addArticleRequest.setCloseTextLink(0);  // 允许文本链接
-            addArticleRequest.setUserSummary(request.getUserSummary());
-            addArticleRequest.setPic("");  // 设置封面图片
-            addArticleRequest.setSourceDetail(new HashMap<>());  // 设置来源详情
-            addArticleRequest.setZoneName("");  // 设置专区名称
+            final AddArticleRequest addArticleRequest = getAddArticleRequest(request);
 
             // 执行API调用
             Call<AddArticleResponse> call = tencentService.addArticle(tencentApiProperties.getCookie(), addArticleRequest);
@@ -78,13 +74,6 @@ public class TencentArticleToolService implements ToolServiceMarker {
 
             // 记录请求和响应日志
             log.info("\n\n请求腾讯云开发者社区发布文章\n req:{} \nres:{}", JSON.toJSONString(addArticleRequest), JSON.toJSONString(response));
-
-            // 构建返回对象
-            ArticleFunctionResponse articleFunctionResponse = new ArticleFunctionResponse();
-            articleFunctionResponse.setStatus(-1);
-            articleFunctionResponse.setArticleId(null);
-            articleFunctionResponse.setUrl(null);
-            articleFunctionResponse.setCopyright(getCopyright());
 
             if (response.isSuccessful()) {
                 log.info("腾讯云开发者社区发布文章成功: {}", JSON.toJSONString(response.body()));
@@ -104,6 +93,45 @@ public class TencentArticleToolService implements ToolServiceMarker {
         } catch (Exception e) {
             log.error("腾讯云开发者社区发帖失败 ", e);
         }
-        return null;
+        return articleFunctionResponse;
+    }
+
+    /**
+     * 获取文章发布请求
+     * <p>
+     * 该方法将文章发布请求转换为实际需要的格式。
+     * 主要功能：
+     * 1. 创建AddArticleRequest对象，并设置请求参数
+     * 2. 将Markdown内容转换为ProseMirror格式
+     * <p>
+     * 待优化点:
+     *         TODO: 后续部分参数需要动态获取
+     *
+     * @param request 文章发布请求，包含文章标题、内容等信息
+     * @return AddArticleRequest对象，包含实际需要的参数
+     */
+    private static @NotNull AddArticleRequest getAddArticleRequest(ArticleFunctionRequest request) {
+        AddArticleRequest addArticleRequest = new AddArticleRequest();
+        addArticleRequest.setTitle(request.getTitle());
+        addArticleRequest.setPlain(request.getMarkdowncontent());
+        addArticleRequest.setContent(addArticleRequest.getContent());
+        addArticleRequest.setSourceType(1);  // 设置为原创
+        addArticleRequest.setClassifyIds(List.of(2));  // 设置文章分类
+        addArticleRequest.setTagIds(List.of(18126));  // 设置文章标签
+        addArticleRequest.setLongtailTag(List.of("mcp"));  // 设置长尾标签
+        addArticleRequest.setColumnIds(List.of(101806));  // 设置专栏ID
+        addArticleRequest.setOpenComment(1);  // 开启评论
+        addArticleRequest.setCloseTextLink(0);  // 允许文本链接
+        addArticleRequest.setUserSummary(request.getUserSummary());
+        addArticleRequest.setPic("");  // 设置封面图片
+        addArticleRequest.setSourceDetail(new HashMap<>());  // 设置来源详情
+        addArticleRequest.setZoneName("");  // 设置专区名称
+        return addArticleRequest;
+    }
+
+
+    @Override
+    public String getArticleList(int listSize) {
+        return "功能暂未实现!";
     }
 }

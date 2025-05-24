@@ -18,7 +18,7 @@ import org.springframework.ai.tool.annotation.ToolParam;
  * 2. 提供JSON序列化配置
  * 3. 支持必填字段验证
  *
- * @author Yang Shuai
+ * @author yangbuyiya
  * @version 1.0.0
  * @since 2025/05/05
  */

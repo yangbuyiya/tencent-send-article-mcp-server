@@ -19,7 +19,7 @@ import retrofit2.http.POST;
  * @version 1.0.0
  */
 public interface ITencentService {
-    
+
     /**
      * 发布文章到腾讯云开发者社区
      * <p>
@@ -44,7 +44,7 @@ public interface ITencentService {
             "content-type: application/json",
             "origin: https://cloud.tencent.com",
             "priority: u=1, i",
-            "referer: https://cloud.tencent.com/developer/article/write-new?draftId=213590",
+            "referer: https://cloud.tencent.com/developer/article/write-new",
             "sec-ch-ua: \"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"",
             "sec-ch-ua-mobile: ?0",
             "sec-ch-ua-platform: \"Windows\"",
