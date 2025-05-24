@@ -1,14 +1,38 @@
+# 腾讯云开发者社区文章发布 MCP 服务器
 
-<h1 align="center">
-    <img width="100" alt="image" src="https://github.com/user-attachments/assets/c95bbbd2-d1da-4255-a2e8-a07d7b89cfd7" />
-	<strong>腾讯云开发者社区文章发布 MCP 服务器</strong>
-</h1>
-<h3 align="center">
-    这是一个基于 MCP (Model Context Protocol) 协议的服务器，专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x
-和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，实现文章的自动发布和管理。
-</h3>
+<div align="center">
+    <img width="120" alt="logo" src="https://github.com/user-attachments/assets/c95bbbd2-d1da-4255-a2e8-a07d7b89cfd7" />
+    <br/>
+    <p>
+        <a href="https://github.com/yangbuyiya/tencent-send-article-mcp-server/stargazers">
+            <img src="https://img.shields.io/github/stars/yangbuyiya/tencent-send-article-mcp-server?style=flat-square" alt="stars"/>
+        </a>
+        <a href="https://github.com/yangbuyiya/tencent-send-article-mcp-server/network/members">
+            <img src="https://img.shields.io/github/forks/yangbuyiya/tencent-send-article-mcp-server?style=flat-square" alt="forks"/>
+        </a>
+        <a href="https://github.com/yangbuyiya/tencent-send-article-mcp-server/issues">
+            <img src="https://img.shields.io/github/issues/yangbuyiya/tencent-send-article-mcp-server?style=flat-square" alt="issues"/>
+        </a>
+        <a href="https://github.com/yangbuyiya/tencent-send-article-mcp-server/blob/main/LICENSE">
+            <img src="https://img.shields.io/github/license/yangbuyiya/tencent-send-article-mcp-server?style=flat-square" alt="license"/>
+        </a>
+    </p>
+    <p>
+        <img src="https://img.shields.io/badge/Spring%20Boot-3.4.5-brightgreen?style=flat-square" alt="Spring Boot"/>
+        <img src="https://img.shields.io/badge/Spring%20AI-1.0.0-brightgreen?style=flat-square" alt="Spring AI"/>
+        <img src="https://img.shields.io/badge/Java-17-orange?style=flat-square" alt="Java"/>
+        <img src="https://img.shields.io/badge/Maven-3.6+-blue?style=flat-square" alt="Maven"/>
+    </p>
+</div>
 
-<div align="center"><b>您是第<img src="https://profile-counter.glitch.me/tencent-send-article-mcp-server/count.svg"></img>个访问tencent-send-article-mcp-server~</b></div>
+## 📝 项目简介
+
+这是一个基于 MCP (Model Context Protocol) 协议的服务器，专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x 和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，实现文章的自动发布和管理。
+
+<div align="center">
+    <img src="https://profile-counter.glitch.me/tencent-send-article-mcp-server/count.svg" alt="访问计数" style="border-radius: 5px; padding: 5px; background: #f0f0f0;"/>
+</div>
+
 
 
 ## 技术栈
