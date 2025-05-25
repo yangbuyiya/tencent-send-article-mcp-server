@@ -27,13 +27,12 @@
 
 ## 📝 项目简介
 
-这是一个基于 MCP (Model Context Protocol) 协议的服务器，专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x 和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，实现文章的自动发布和管理。
+这是一个基于 MCP (Model Context Protocol) 协议的服务器，专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x
+和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，实现文章的自动发布和管理。
 
 <div align="center">
     <img src="https://profile-counter.glitch.me/tencent-send-article-mcp-server/count.svg" alt="访问计数" style="border-radius: 5px; padding: 5px; background: #f0f0f0;"/>
 </div>
-
-
 
 ## 技术栈
 
@@ -84,14 +83,11 @@ java -jar target/tencent-send-article-mcp-server-app.jar --tencent.api.cookie="y
 ```bash
 # 编译项目
 mvn clean package
-
-# 启动服务
-java -jar target/tencent-send-article-mcp-server-app.jar
 ```
 
 ## 配置说明
 
-### MCP 客户端配置
+### MCP 客户端配置 STDIO 模式
 
 在您的 MCP 客户端配置文件中添加以下配置：
 
@@ -112,15 +108,99 @@ java -jar target/tencent-send-article-mcp-server-app.jar
 }
 ```
 
-### 应用配置
+也可以调用 [ClientStdio.java](src/test/java/com/yby6/mcp/server/tencent/springAi/ClientStdio.java) 类进行测试是否通信
 
-在 `application.yml` 中可以配置以下选项：
+### MCP 客户端配置 SSE 模式
+
+```yaml
+{
+  "mcpServers": {
+    "tencent-send-article-mcp-server": {
+      "baseUrl": "http://127.0.0.1:8633/sse"
+    }
+  }
+}
+
+```
+
+项目默认使用 STDIO 模式，如果需要使用 SSE 模式，请按照以下配置进行修改：(项目已经区分配置, 可通过 profiles.active=sse/stdio
+切换模式)
+
+#### 修改配置文件 - 新增端口
 
 ```yaml
 
-tencent:
-  api:
-    cookie: ${TENCENT_API_COOKIE:这里是你的Cookie}
+server:
+  port: 8633 # 端口号
+
+```
+
+#### 修改配置文件 - 切换模式为SSE
+
+```yaml
+  ai:
+    mcp:
+      server:
+        stdio: true # 设置为false 为sse模式
+        name: ${spring.application.name}
+        version: 1.0.0
+        type: sync # 同步/异步
+        instructions: "
+        这是一个基于 MCP (Model Context Protocol) 协议的服务器，
+        专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x 和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，
+        实现文章的自动发布和管理。
+        "
+        sse-endpoint: /sse # sse端点
+        sse-message-endpoint: /mcp/messages # 客户端 sse消息端点
+        capabilities:
+          tool: true
+          resource: true
+          prompt: true
+          completion: true
+```
+
+#### 修改配置文件 - 日志配置修改
+
+```yaml
+
+# 注意：您必须禁用web横幅和控制台日志记录，以允许STDIO传输工作！！！
+main:
+  banner-mode: off
+  # SSE打开, STDIO注释
+  web-application-type: none
+
+logging:
+  # SSE打开, STDIO注释
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: data/log/${spring.application.name}.log
+
+```
+
+#### 修改 pom.xml - 新增SSE依赖支持
+
+```xml
+
+<!-- 标准 SSE/STDIO 服务器配置 通过配置切换 -->
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-starter-mcp-server-webflux</artifactId>
+</dependency>
+
+```
+
+然后就可以调用 [ClientSse.java](src/test/java/com/yby6/mcp/server/tencent/springAi/ClientSse.java) 类进行测试是否通信
+
+## Docker 部署使用
+
+```shell
+
+docker run -d --name tencent-send-article-mcp-server \
+-p 8635:8633 \
+-e TENCENT_API_COOKIE="测试Cookie" \
+registry.cn-hangzhou.aliyuncs.com/yby6/tencent-send-article-mcp-server-app:1.0.0
+
 ```
 
 ## 安全注意事项
