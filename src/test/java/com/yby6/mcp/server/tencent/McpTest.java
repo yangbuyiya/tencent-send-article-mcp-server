@@ -49,6 +49,15 @@ public class McpTest {
                 }
                 ```
                 
+                ```vue
+                public class Example {
+                    public void method() {
+                        // 代码示例
+                    }
+                }
+                ```
+                
+                
                 我是一段普通文本, 可以包含换行
                 
                 

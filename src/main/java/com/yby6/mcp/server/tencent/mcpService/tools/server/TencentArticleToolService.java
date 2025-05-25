@@ -114,7 +114,7 @@ public class TencentArticleToolService implements ToolServiceMarker {
         AddArticleRequest addArticleRequest = new AddArticleRequest();
         addArticleRequest.setTitle(request.getTitle());
         addArticleRequest.setPlain(request.getMarkdowncontent());
-        addArticleRequest.setContent(addArticleRequest.getContent().replaceAll("```vue", "```javascript"));
+        addArticleRequest.setContent(addArticleRequest.getContent());
         addArticleRequest.setSourceType(1);  // 设置为原创
         addArticleRequest.setClassifyIds(List.of(2));  // 设置文章分类
         addArticleRequest.setTagIds(List.of(18126));  // 设置文章标签

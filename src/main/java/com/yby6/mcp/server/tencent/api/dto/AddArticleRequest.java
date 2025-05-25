@@ -139,7 +139,7 @@ public class AddArticleRequest {
      * @return ProseMirror格式的内容
      */
     public String getContent() {
-        return MarkdownToProseMirrorConverter.convert(plain);
+        return MarkdownToProseMirrorConverter.convert(plain.replaceAll("```vue", "```javascript"));
     }
 
 }
