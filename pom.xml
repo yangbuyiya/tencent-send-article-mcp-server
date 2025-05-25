@@ -12,7 +12,32 @@
     <artifactId>tencent-send-article-mcp-server</artifactId>
     <version>1.0.0</version>
     <name>tencent-send-article-mcp-server</name>
-    <description>tencent-send-article-mcp-server</description>
+    <description>
+        这是一个基于 MCP (Model Context Protocol) 协议的服务器，专门用于自动化发布文章到腾讯云开发者社区。
+        通过集成 Spring Boot 3.x 和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，实现文章的自动发布和管理。
+    </description>
+
+    <developers>
+        <developer>
+            <id>yangbuyi</id>
+            <name>杨不易</name>
+            <email>yangbuyiya@duck.com</email>
+            <organization>yby6</organization>
+            <organizationUrl>https://yby6.com</organizationUrl>
+            <roles>
+                <role>开发负责人</role>
+                <role>架构设计</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/yangbuyiya/tencent-send-article-mcp-server</url>
+        <connection>scm:git:git://github.com/yangbuyiya/tencent-send-article-mcp-server.git</connection>
+        <developerConnection>scm:git:ssh://github.com:yangbuyiya/tencent-send-article-mcp-server.git
+        </developerConnection>
+    </scm>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -27,72 +52,84 @@
 
 
     <dependencies>
+        <!-- Spring Web，提供RESTful API能力 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
 
+        <!-- Spring Boot测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
+        <!-- 标准 STDIO 服务器配置 -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server</artifactId>
         </dependency>
 
+        <!-- 标准 SSE/STDIO 服务器配置 通过配置切换 -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-server-webflux</artifactId>
+        </dependency>
+
+        <!-- 阿里Fastjson，JSON解析与序列化 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>2.0.28</version>
         </dependency>
 
+        <!-- Lombok，简化Java代码开发（需IDE支持） -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
+        <!-- Retrofit2，类型安全的HTTP客户端 -->
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>retrofit</artifactId>
             <version>2.9.0</version>
         </dependency>
-
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-jackson</artifactId>
             <version>2.9.0</version>
         </dependency>
-
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>adapter-rxjava2</artifactId>
             <version>2.9.0</version>
         </dependency>
 
+        <!-- Flexmark，Markdown解析与渲染 -->
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-all</artifactId>
             <version>0.64.8</version>
         </dependency>
 
+        <!-- JUnit，单元测试框架 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- CommonMark 核心库 -->
+        <!-- CommonMark，Markdown核心库 -->
         <dependency>
             <groupId>org.commonmark</groupId>
             <artifactId>commonmark</artifactId>
             <version>0.21.0</version>
         </dependency>
 
-        <!-- Jackson 用于 JSON 处理 -->
+        <!-- Jackson，JSON处理库 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -101,6 +138,9 @@
 
     </dependencies>
 
+    <!--
+        依赖版本统一管理，使用Spring AI官方BOM
+    -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -113,6 +153,11 @@
         </dependencies>
     </dependencyManagement>
 
+    <!--
+        构建插件配置
+        - maven-compiler-plugin：Java编译插件
+        - spring-boot-maven-plugin：Spring Boot打包插件
+    -->
     <build>
         <finalName>tencent-send-article-mcp-server-app</finalName>
         <plugins>

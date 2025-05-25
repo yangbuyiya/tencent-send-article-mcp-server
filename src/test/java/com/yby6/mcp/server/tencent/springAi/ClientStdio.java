@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.yby6.mcp.server.tencent;
+package com.yby6.mcp.server.tencent.springAi;
 
 import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.transport.ServerParameters;
@@ -33,7 +33,8 @@ public class ClientStdio {
     public static void main(String[] args) {
 
         var stdioParams = ServerParameters.builder("/Users/yangbuyi/Library/Java/JavaVirtualMachines/graalvm-jdk-17.0.11/Contents/Home/bin/java")
-                .args("-jar",
+                .args("-Dspring.ai.mcp.server.stdio=true", "-Dspring.main.web-application-type=none",
+                        "-Dlogging.pattern.console=", "-jar",
                         "/Users/yangbuyi/Documents/projectDemo/ai/study/tencent-send-article-mcp-server/target/tencent-send-article-mcp-server-app.jar")
                 .build();
 

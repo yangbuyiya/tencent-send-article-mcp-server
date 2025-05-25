@@ -1,0 +1,40 @@
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+spring:
+  main:
+    banner-mode: off  # 关闭启动时的横幅显示，提升启动速度
+    # stdio 模式打开，sse 模式，注释掉。
+    web-application-type: none  # 设置为非Web应用程序类型，适用于非Web应用
+  ai:
+    mcp:
+      server:
+        stdio: true
+        name: ${spring.application.name}
+        version: 1.0.0
+        type: sync # 同步/异步
+        instructions: "
+        这是一个基于 MCP (Model Context Protocol) 协议的服务器，
+        专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x 和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，
+        实现文章的自动发布和管理。
+        "
+        sse-endpoint: /sse # sse端点
+        sse-message-endpoint: /mcp/messages # 客户端 sse消息端点
+        capabilities:
+          tool: true
+          resource: true
+          prompt: true
+          completion: true
+
+# 日志配置
+logging:
+  # stdio 模式打开，sse 模式，注释掉。
+  pattern:
+    console: # 控制台日志格式，可以自定义日志输出样式
+  file:
+    name: data/log/${spring.application.name}.log  # 日志文件的路径和名称，日志将存储在 data/log 目录下，文件名为应用程序名称.log
+
