@@ -78,7 +78,28 @@ export TENCENT_API_COOKIE="your_cookie_here"
 java -jar target/tencent-send-article-mcp-server-app.jar --tencent.api.cookie="your_cookie_here"
 ```
 
-4. **编译和运行**
+4. **修改代码定义文章专栏**
+
+前往 getAddArticleRequest 方法中修改文章部分请求参数
+具体参数前往 登录 [腾讯云开发者社区](https://cloud.tencent.com/developer) 
+打开开发者工具, 发布一个测试文章选好你要发布的专栏等数据
+找到 `addArticle` 请求复制出来, 将请求参数下面当中的参数替换即可
+
+```java
+// 只允许修改下面的参数
+addArticleRequest.setSourceType(1);  // 设置为原创
+addArticleRequest.setClassifyIds(List.of(3,4));  // 设置文章分类
+addArticleRequest.setTagIds(List.of(17375));  // 设置文章标签
+addArticleRequest.setLongtailTag(List.of("面试","面试题","趣味面试"));  // 设置长尾标签
+addArticleRequest.setColumnIds(List.of(105380));  // 设置专栏ID
+addArticleRequest.setOpenComment(1);  // 开启评论
+addArticleRequest.setCloseTextLink(1);  // 允许文本链接
+addArticleRequest.setPic("https://foruda.gitee.com/images/1748188287230778527/9289646d_5151444.png");  // 设置封面图片
+addArticleRequest.setSourceDetail(new HashMap<>());  // 设置来源详情
+addArticleRequest.setZoneName("");  // 设置专区名称
+```
+
+5. **编译和运行**
 
 ```bash
 # 编译项目
@@ -232,7 +253,7 @@ IMAGE_TAG="1.0.0"
 
 docker run -d --name tencent-send-article-mcp-server \
 -p 8635:8633 \
--e TENCENT_API_COOKIE="测试Cookie" \
+-e TENCENT_API_COOKIE="qcommunity_identify_id=V6pvjxmW1JPuCEMovMUTz; qcloud_uid=VaIEoNdiKsUA; web_uid=ae70b69c-f87e-41c8-adfc-06efafb5678d; loginType=wx; lastLoginIdentity=51605f0971933755e7f8a53c030a98bc; qcommunity_session=8f9a94888dd80c7cba9f04103107b4821b78caacdbdc8a2ef693787a26905024; language=zh; _ga=GA1.2.273799001.1746384291; _gcl_au=1.1.1073535231.1746384292; qcstats_seo_keywords=%E5%93%81%E7%89%8C%E8%AF%8D-%E5%93%81%E7%89%8C%E8%AF%8D-%E8%85%BE%E8%AE%AF%E4%BA%91; ewpUid=a3134f73-11f8-48ef-a865-7a91c897b948; opc_xsrf=ad04464bd315d51a9252cd0e5e37b930%7C1747930601; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%22100005325524%22%2C%22first_id%22%3A%221969c9d82841f57-06185ef48d4f27-1a525636-2104200-1969c9d82852679%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTk2OWM5ZDgyODQxZjU3LTA2MTg1ZWY0OGQ0ZjI3LTFhNTI1NjM2LTIxMDQyMDAtMTk2OWM5ZDgyODUyNjc5IiwiJGlkZW50aXR5X2xvZ2luX2lkIjoiMTAwMDA1MzI1NTI0In0%3D%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%22100005325524%22%7D%2C%22%24device_id%22%3A%221969c9d82841f57-06185ef48d4f27-1a525636-2104200-1969c9d82852679%22%7D; trafficParams=***%24%3Btimestamp%3D1747932275435%3Bfrom_type%3Dserver%3Btrack%3Dd6e10566-f9d9-4045-a6ce-45ce105aec4c%3B%24***; qcloud_from=qcloud.directEnter.developer-1748014503549; qcmainCSRFToken=4xnRFK_vITQD; qcloud_visitId=a034592f38863868d900b64935b11757; _gat=1; uin=o100005325524; nick=1692700664; intl=1" \
 registry.cn-hangzhou.aliyuncs.com/yangbuyiya/tencent-send-article-mcp-server-app:1.0.0
 
 ```
