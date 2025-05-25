@@ -201,7 +201,7 @@ logging:
 docker run -d --name tencent-send-article-mcp-server \
 -p 8635:8633 \
 -e TENCENT_API_COOKIE="测试Cookie" \
-registry.cn-hangzhou.aliyuncs.com/yby6/tencent-send-article-mcp-server-app:1.0.0
+registry.cn-hangzhou.aliyuncs.com/yangbuyiya/tencent-send-article-mcp-server-app:1.0.0
 
 ```
 
@@ -233,7 +233,7 @@ IMAGE_TAG="1.0.0"
 docker run -d --name tencent-send-article-mcp-server \
 -p 8635:8633 \
 -e TENCENT_API_COOKIE="测试Cookie" \
-registry.cn-hangzhou.aliyuncs.com/yby6/tencent-send-article-mcp-server-app:1.0.0
+registry.cn-hangzhou.aliyuncs.com/yangbuyiya/tencent-send-article-mcp-server-app:1.0.0
 
 ```
 

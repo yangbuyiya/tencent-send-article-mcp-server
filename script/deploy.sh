@@ -65,14 +65,14 @@ export http_proxy=http://127.0.0.1:7890
 export https_proxy=http://127.0.0.1:7890
 
 # Docker镜像相关配置
-DOCKER_IMAGE_NAME="yby6/tencent-send-article-mcp-server-app"
+DOCKER_IMAGE_NAME="yangbuyiya/tencent-send-article-mcp-server-app"
 DOCKER_IMAGE_TAG="1.0.0"
 DOCKER_PLATFORM="linux/amd64,linux/arm64"
 DOCKERFILE_PATH="Dockerfile"
 
 # 阿里云配置
 ALIYUN_REGISTRY="registry.cn-hangzhou.aliyuncs.com"
-NAMESPACE="yby6"
+NAMESPACE="yangbuyiya"
 IMAGE_NAME="tencent-send-article-mcp-server-app"
 IMAGE_TAG="1.0.0"
 
