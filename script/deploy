@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# 获取脚本所在目录
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# 检测操作系统类型
+case "$(uname -s)" in
+    CYGWIN*|MINGW*|MSYS*)
+        # Windows 系统
+        if [ -f "${SCRIPT_DIR}/deploy.bat" ]; then
+            cmd.exe /c "${SCRIPT_DIR}/deploy.bat"
+        else
+            echo "错误：未找到 deploy.bat 文件"
+            exit 1
+        fi
+        ;;
+    Linux*|Darwin*)
+        # Linux/Mac 系统
+        if [ -f "${SCRIPT_DIR}/deploy.sh" ]; then
+            bash "${SCRIPT_DIR}/deploy.sh"
+        else
+            echo "错误：未找到 deploy.sh 文件"
+            exit 1
+        fi
+        ;;
+    *)
+        echo "错误：不支持的操作系统类型"
+        exit 1
+        ;;
+esac 
