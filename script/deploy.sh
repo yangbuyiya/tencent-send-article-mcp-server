@@ -70,11 +70,6 @@ DOCKER_IMAGE_TAG="1.0.0"
 DOCKER_PLATFORM="linux/amd64,linux/arm64"
 DOCKERFILE_PATH="Dockerfile"
 
-# 容器运行配置
-CONTAINER_NAME="tencent-send-article-mcp-server-app"
-CONTAINER_PORT="9633"
-HOST_PORT="9633"
-
 # 阿里云配置
 ALIYUN_REGISTRY="registry.cn-hangzhou.aliyuncs.com"
 NAMESPACE="yby6"

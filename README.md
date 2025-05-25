@@ -194,6 +194,40 @@ logging:
 
 ## Docker 部署使用
 
+### 快速部署
+
+```shell
+
+docker run -d --name tencent-send-article-mcp-server \
+-p 8635:8633 \
+-e TENCENT_API_COOKIE="测试Cookie" \
+registry.cn-hangzhou.aliyuncs.com/yby6/tencent-send-article-mcp-server-app:1.0.0
+
+```
+
+### 构建镜像
+
+> ⚠️先修改部署配置文件, 我这里以shell文件为例
+
+```shell
+# Docker镜像相关配置
+DOCKER_IMAGE_NAME="改成你的DockerHub仓库名称/tencent-send-article-mcp-server-app"
+DOCKER_IMAGE_TAG="1.0.0"
+DOCKER_PLATFORM="linux/amd64,linux/arm64"
+DOCKERFILE_PATH="Dockerfile"
+
+# 阿里云配置
+ALIYUN_REGISTRY="registry.cn-hangzhou.aliyuncs.com"
+NAMESPACE="你的阿里云命名空间仓库名称"
+IMAGE_NAME="tencent-send-article-mcp-server-app"
+IMAGE_TAG="1.0.0"
+
+```
+
+修改完毕后, 运行 [deploy](script/deploy) 脚本进行构建, 构建完成后会生成镜像
+
+### 运行
+
 ```shell
 
 docker run -d --name tencent-send-article-mcp-server \
