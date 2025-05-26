@@ -78,7 +78,28 @@ export TENCENT_API_COOKIE="your_cookie_here"
 java -jar target/tencent-send-article-mcp-server-app.jar --tencent.api.cookie="your_cookie_here"
 ```
 
-4. **编译和运行**
+4. **修改代码定义文章专栏**
+
+前往 getAddArticleRequest 方法中修改文章部分请求参数
+具体参数前往 登录 [腾讯云开发者社区](https://cloud.tencent.com/developer) 
+打开开发者工具, 发布一个测试文章选好你要发布的专栏等数据
+找到 `addArticle` 请求复制出来, 将请求参数下面当中的参数替换即可
+
+```java
+// 只允许修改下面的参数
+addArticleRequest.setSourceType(1);  // 设置为原创
+addArticleRequest.setClassifyIds(List.of(3,4));  // 设置文章分类
+addArticleRequest.setTagIds(List.of(17375));  // 设置文章标签
+addArticleRequest.setLongtailTag(List.of("面试","面试题","趣味面试"));  // 设置长尾标签
+addArticleRequest.setColumnIds(List.of(105380));  // 设置专栏ID
+addArticleRequest.setOpenComment(1);  // 开启评论
+addArticleRequest.setCloseTextLink(1);  // 允许文本链接
+addArticleRequest.setPic("https://foruda.gitee.com/images/1748188287230778527/9289646d_5151444.png");  // 设置封面图片
+addArticleRequest.setSourceDetail(new HashMap<>());  // 设置来源详情
+addArticleRequest.setZoneName("");  // 设置专区名称
+```
+
+5. **编译和运行**
 
 ```bash
 # 编译项目
@@ -232,7 +253,7 @@ IMAGE_TAG="1.0.0"
 
 docker run -d --name tencent-send-article-mcp-server \
 -p 8635:8633 \
--e TENCENT_API_COOKIE="测试Cookie" \
+-e TENCENT_API_COOKIE="你在腾讯云开发者社区获取的Cookie" \
 registry.cn-hangzhou.aliyuncs.com/yangbuyiya/tencent-send-article-mcp-server-app:1.0.0
 
 ```

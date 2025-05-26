@@ -115,15 +115,16 @@ public class TencentArticleToolService implements ToolServiceMarker {
         addArticleRequest.setTitle(request.getTitle());
         addArticleRequest.setPlain(request.getMarkdowncontent());
         addArticleRequest.setContent(addArticleRequest.getContent());
-        addArticleRequest.setSourceType(1);  // 设置为原创
-        addArticleRequest.setClassifyIds(List.of(2));  // 设置文章分类
-        addArticleRequest.setTagIds(List.of(18126));  // 设置文章标签
-        addArticleRequest.setLongtailTag(List.of("mcp"));  // 设置长尾标签
-        addArticleRequest.setColumnIds(List.of(101806));  // 设置专栏ID
-        addArticleRequest.setOpenComment(1);  // 开启评论
-        addArticleRequest.setCloseTextLink(0);  // 允许文本链接
         addArticleRequest.setUserSummary(request.getUserSummary());
-        addArticleRequest.setPic("");  // 设置封面图片
+        // 只允许修改下面的参数
+        addArticleRequest.setSourceType(1);  // 设置为原创
+        addArticleRequest.setClassifyIds(List.of(3,4));  // 设置文章分类
+        addArticleRequest.setTagIds(List.of(17375));  // 设置文章标签
+        addArticleRequest.setLongtailTag(List.of("面试","面试题","趣味面试"));  // 设置长尾标签
+        addArticleRequest.setColumnIds(List.of(105380));  // 设置专栏ID
+        addArticleRequest.setOpenComment(1);  // 开启评论
+        addArticleRequest.setCloseTextLink(1);  // 允许文本链接
+        addArticleRequest.setPic("https://foruda.gitee.com/images/1748188287230778527/9289646d_5151444.png");  // 设置封面图片
         addArticleRequest.setSourceDetail(new HashMap<>());  // 设置来源详情
         addArticleRequest.setZoneName("");  // 设置专区名称
         return addArticleRequest;
