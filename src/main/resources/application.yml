@@ -9,4 +9,4 @@ spring:
     name: tencent-send-article-mcp-server
   profiles:
     # 模式激活配置
-    active: stdio
+    active: sse

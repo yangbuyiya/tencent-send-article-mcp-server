@@ -22,6 +22,8 @@ spring:
         专门用于自动化发布文章到腾讯云开发者社区。通过集成 Spring Boot 3.x 和 Spring AI，为 AI 助手提供了与腾讯云开发者社区交互的能力，
         实现文章的自动发布和管理。
         "
+        sse-endpoint: /tencent/sse
+        sse-message-endpoint: /tencent/sse/message
 
 # 日志配置
 logging:
